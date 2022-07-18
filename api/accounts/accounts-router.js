@@ -15,20 +15,39 @@ router.get('/:id', md.checkAccountId, (req, res, next) => {
   }
 })
 
-router.post('/', (req, res, next) => {
+router.post('/', md.checkAccountPayload, md.checkAccountNameUnique, (req, res, next) => {
   // DO YOUR MAGIC
+  try{
+    res.json('something')
+  } catch(err){
+    next(err)
+  }
 })
 
-router.put('/:id', (req, res, next) => {
+
+router.put('/:id', md.checkAccountId, md.checkAccountPayload, md.checkAccountNameUnique,  (req, res, next) => {
   // DO YOUR MAGIC
+  try{
+    res.json('something')
+  } catch(err){
+    next(err)
+  }
 });
 
-router.delete('/:id', (req, res, next) => {
+router.delete('/:id',  md.checkAccountId, (req, res, next) => {
   // DO YOUR MAGIC
+  try{
+    res.json('something')
+  } catch(err){
+    next(err)
+  }
 })
 
 router.use((err, req, res, next) => { // eslint-disable-line
   // DO YOUR MAGIC
+  res.status(err.status || 500).json({
+    message: err.message
+  })
 })
 
 module.exports = router;
