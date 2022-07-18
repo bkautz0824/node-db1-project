@@ -1,11 +1,18 @@
 const router = require('express').Router()
-
+const md = require('./accounts-middleware')
+const Account  =  require('./accounts-model')
 router.get('/', (req, res, next) => {
   // DO YOUR MAGIC
 })
 
-router.get('/:id', (req, res, next) => {
+router.get('/:id', md.checkAccountId, (req, res, next) => {
   // DO YOUR MAGIC
+  try{
+    
+    res.json(req.account)
+  } catch(err){
+    next(err)
+  }
 })
 
 router.post('/', (req, res, next) => {
